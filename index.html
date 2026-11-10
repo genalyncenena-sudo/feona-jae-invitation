@@ -1,454 +1,375 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feona Jae | Princess Birthday</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Feona Jae | 7th Birthday Royal Invitation</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
- margin: 0;
- font-family: Poppins, sans-serif;
- color: #754879;
- text-align: center;
- background: #fff3fc;
- overflow-x: hidden;
+  margin: 0;
+  background: #f9e3ff;
+  font-family: Georgia, serif;
+  text-align: center;
+  color: #71317e;
 }
 
-.hero {
- min-height: 100vh;
- padding: 35px 16px;
- position: relative;
- overflow: hidden;
- background:
- radial-gradient(ellipse at 50% 15%, #fff 0%, transparent 45%),
- linear-gradient(180deg,#a994e5,#e8c9f2 48%,#fff0f6);
+.invitation {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
 }
 
-.castle {
- font-size: 100px;
- filter: drop-shadow(0 5px 10px #70408066);
- animation: float 4s ease-in-out infinite;
+.poster {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  position: relative;
+  background-image: url("princess-background.jpg");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
-@keyframes float {
- 50% { transform: translateY(-12px); }
+.hotspot {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border-radius: 30px;
+  box-shadow: none;
 }
 
-h1 {
- font-family: 'Great Vibes', cursive;
- font-size: clamp(52px,12vw,85px);
- color: white;
- text-shadow: 2px 4px 10px #79518c;
- margin: 10px 0;
+.hotspot:focus-visible {
+  outline: 3px solid white;
+  background: #ffffff33;
 }
 
-.script {
- font-family: 'Great Vibes', cursive;
- font-size: 45px;
- color: #b36baa;
+/* Background music controls */
+.music-area {
+  top: 2%;
+  left: 1%;
+  width: 34%;
+  height: 10%;
 }
 
-.name {
- font-family: 'Great Vibes', cursive;
- font-size: 65px;
- color: #ad63a9;
+/* Invitation voice button */
+.voice-area {
+  top: 2%;
+  right: 1%;
+  width: 19%;
+  height: 10%;
 }
 
-.subtitle {
- letter-spacing: 4px;
- font-size: 12px;
+/* RSVP button */
+.rsvp-area {
+  bottom: 2%;
+  left: 14%;
+  width: 19%;
+  height: 10%;
 }
 
-.photo {
- width: min(85%,350px);
- border: 9px solid white;
- border-radius: 180px 180px 25px 25px;
- box-shadow: 0 12px 35px #70408055;
- object-fit: cover;
+/* Find the Royal Castle button */
+.location-area {
+  bottom: 2%;
+  right: 13%;
+  width: 20%;
+  height: 10%;
 }
 
-.portrait { height: 400px; object-position: center 25%; }
-.fullphoto {
- width: min(90%,390px);
- height: auto;
- border-radius: 22px;
+.reminder-section {
+  padding: 25px 15px 40px;
 }
 
-.card {
- max-width: 550px;
- margin: 25px auto;
- padding: 28px 20px;
- background: #ffffffdf;
- border: 2px solid #e7c6e9;
- border-radius: 28px;
- box-shadow: 0 10px 30px #8f6a9b30;
+.reminder-button {
+  display: inline-block;
+  padding: 16px 30px;
+  border-radius: 40px;
+  color: white;
+  background: linear-gradient(135deg, #ed65bd, #9252d7);
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: clamp(17px, 3vw, 23px);
+  font-weight: bold;
+  box-shadow: 0 6px 18px #9a55bb55;
+  border: 3px solid white;
+  transition: .3s;
 }
 
-.details {
- font-family: 'Playfair Display',serif;
- font-size: 22px;
- line-height: 1.9;
+.reminder-button:hover {
+  transform: scale(1.05);
 }
 
-button {
- padding: 13px 22px;
- margin: 7px;
- border: none;
- border-radius: 30px;
- background: linear-gradient(135deg,#dba5dc,#987bd0);
- color: white;
- font-family: Poppins;
- cursor: pointer;
- box-shadow: 0 5px 12px #8e65a044;
+.reminder-subtitle {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #9d51a8;
+  margin-bottom: 18px;
 }
-
-button:hover { transform: scale(1.04); }
-
-.butterfly {
- position: fixed;
- z-index: 5;
- pointer-events: none;
- font-size: 26px;
- animation: fly 14s linear infinite;
-}
-
-.b1 { top: 15%; left: -40px; }
-.b2 { top: 55%; left: -40px; animation-delay: 4s; }
-.b3 { top: 80%; left: -40px; animation-delay: 8s; }
-
-@keyframes fly {
- 0% { transform: translateX(0) translateY(0); }
- 50% { transform: translateX(55vw) translateY(-60px); }
- 100% { transform: translateX(110vw) translateY(20px); }
-}
-
-.sparkle {
- position: absolute;
- color: white;
- animation: sparkle 2s infinite alternate;
-}
-
-@keyframes sparkle {
- from { opacity: .2; transform: scale(.7); }
- to { opacity: 1; transform: scale(1.3); }
-}
-
-.countdown {
- display: flex;
- justify-content: center;
- gap: 9px;
- flex-wrap: wrap;
-}
-
-.time {
- background: white;
- padding: 13px;
- min-width: 68px;
- border-radius: 15px;
-}
-
-.time strong {
- display: block;
- font-size: 24px;
- color: #ad63a9;
-}
-
-.time small { font-size: 10px; }
 
 footer {
- padding: 30px;
- background: #f2dff0;
+  padding: 20px;
+  color: #95549d;
+  background: #f5d9f2;
+}
+
+@media (max-width: 600px) {
+  .reminder-section {
+    padding: 18px 10px 30px;
+  }
+
+  .reminder-button {
+    padding: 13px 22px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="butterfly b1">🦋</div>
-<div class="butterfly b2">🦋</div>
-<div class="butterfly b3">🦋</div>
+<main class="invitation">
 
-<section class="hero">
+  <div class="poster" aria-label="Feona Jae's princess birthday invitation">
 
-<div class="sparkle" style="top:12%;left:12%">✦</div>
-<div class="sparkle" style="top:25%;right:15%">✧</div>
-<div class="sparkle" style="top:65%;left:8%">✧</div>
+    <button class="hotspot music-area"
+      onclick="toggleMusic()"
+      aria-label="Play or pause background music"
+      title="Background Music">
+    </button>
 
-<p class="subtitle">✨ A ROYAL INVITATION ✨</p>
+    <button class="hotspot voice-area"
+      onclick="inviteVoice()"
+      aria-label="Play invitation voice"
+      title="Play Invitation Voice">
+    </button>
 
-<div class="castle">🏰</div>
+    <button class="hotspot rsvp-area"
+      onclick="rsvp()"
+      aria-label="RSVP"
+      title="RSVP">
+    </button>
 
-<h1>Once Upon a Birthday</h1>
+    <button class="hotspot location-area"
+      onclick="openMap()"
+      aria-label="Find the Royal Castle"
+      title="Find the Royal Castle">
+    </button>
 
-<p>A magical celebration awaits!</p>
+  </div>
 
-<img class="photo portrait"
-src="feona-portrait.jpeg"
-alt="Feona Jae Princess Portrait">
+  <section class="reminder-section">
+    <p class="reminder-subtitle">
+      ✨ A little reminder for our royal guests ✨
+    </p>
 
-<div class="card">
+    <a href="reminder.html" class="reminder-button">
+      👑 A Magical Reminder! 💗
+    </a>
+  </section>
 
-<p>THE ROYAL FAMILY CORDIALLY INVITES YOU TO CELEBRATE THE</p>
-
-<div class="script">7th Birthday of</div>
-
-<div class="name">Feona Jae</div>
-
-<p>Join our little princess for an enchanting afternoon filled with love, laughter and magical memories!</p>
-
-<div class="details">
-November 16, 2026<br>
-2:00 PM<br>
-The Courtyard Resort<br>
-Morong, Rizal
-</div>
-
-<p>🌸 Your presence will make her day extra special! 🌸</p>
-
-<button onclick="inviteVoice()">🔊 Listen to my invitation</button>
-<button onclick="stopVoice()">⏹ Stop Voice</button>
-
-</div>
-
-<div class="card">
-
-<div class="script">A Magical Reminder!</div>
-
-<p>
-Please don't forget to bring your
-<strong>SWIMMING ATTIRE!</strong> 🩱
-</p>
-
-<p>
-You are welcome to enjoy swimming
-after the birthday program!
-</p>
-
-<div style="font-size:45px">🏊‍♀️ 🦋 🌸</div>
-
-</div>
-
-<button onclick="toggleMusic()" id="musicButton">
-🎵 Play Magical Princess Music
-</button>
-
-<p style="font-size:11px">
-Tap to play or pause the background melody.
-</p>
-
-</section>
-
-<section style="padding:35px 15px">
-
-<div class="script">Counting Down to the Magic</div>
-
-<div class="countdown">
-<div class="time"><strong id="days">00</strong><small>DAYS</small></div>
-<div class="time"><strong id="hours">00</strong><small>HOURS</small></div>
-<div class="time"><strong id="minutes">00</strong><small>MINUTES</small></div>
-<div class="time"><strong id="seconds">00</strong><small>SECONDS</small></div>
-</div>
-
-<div class="card">
-<div class="script">A Princess's Special Day</div>
-
-<img class="fullphoto"
-src="feona-full.jpeg"
-alt="Feona's Full Princess Dress">
-
-<p>Can't wait to celebrate with you!</p>
-
-</div>
-
-<div class="card">
-
-<div class="script">Will You Join Us?</div>
-
-<p>We would love to know if you can come!</p>
-
-<button onclick="rsvp()">💌 RSVP Here</button>
-
-</div>
-
-<div class="card">
-
-<div class="script">Find the Royal Castle</div>
-
-<p>📍 The Courtyard Resort, Morong, Rizal</p>
-
-<button onclick="openMap()">📍 Get Directions</button>
-
-</div>
-
-</section>
+</main>
 
 <footer>
-
-<div class="script">With Love,</div>
-
-<div class="name">Feona Jae</div>
-
-<p>Thank you for being part of my magical story! 🦋</p>
-
-<div>✨ 👑 🌸 ✨</div>
-
+  ✨ Thank you for being part of Feona Jae's magical story! ✨
+  <br>🦋 🌸 👑 🌸 🦋
 </footer>
 
 <script>
 
-// CHILDLIKE INVITATION VOICE
+// ===================================
+// PRINCESS INVITATION VOICE OVER
+// ===================================
+
 function inviteVoice() {
- if (!window.speechSynthesis) {
-  alert("Voice is not supported in this browser.");
-  return;
- }
 
- speechSynthesis.cancel();
+  if (!window.speechSynthesis) {
+    alert("Your browser does not support voice playback.");
+    return;
+  }
 
- const message =
- "Hello, my dear friends! It's me, Feona! " +
- "I'm turning seven years old, and I would love to invite you " +
- "to my magical princess birthday party! " +
- "Let's celebrate together on November sixteenth, " +
- "at two o'clock in the afternoon, " +
- "at The Courtyard Resort in Morong, Rizal. " +
- "And please don't forget to bring your swimming attire! " +
- "You can enjoy swimming with us after the program! " +
- "I can't wait to see you! Bye bye!";
+  speechSynthesis.cancel();
 
- const voice = new SpeechSynthesisUtterance(message);
+  const message =
+    "Hello, my dear friends! " +
+    "It's me, Feona! " +
+    "I'm turning seven years old! " +
+    "And I would love to invite you to my magical princess birthday party! " +
+    "Let's celebrate together on November sixteenth, twenty twenty-six, " +
+    "at two o'clock in the afternoon, " +
+    "at The Courtyard Resort in Morong, Rizal! " +
+    "Please don't forget to bring your swimming attire! " +
+    "You can also enjoy swimming with us after the birthday program! " +
+    "I can't wait to see you! " +
+    "See you there! Bye bye!";
 
- voice.lang = "en-US";
- voice.rate = 0.85;
- voice.pitch = 1.5;
- voice.volume = 1;
+  const voice = new SpeechSynthesisUtterance(message);
 
- const voices = speechSynthesis.getVoices();
+  voice.lang = "en-US";
+  voice.rate = 0.88;
+  voice.pitch = 1.65;
+  voice.volume = 1;
 
- const selected = voices.find(v =>
-  /samantha|aria|jenny|zira/i.test(v.name) &&
-  v.lang.startsWith("en")
- ) || voices.find(v => v.lang.startsWith("en"));
+  const voices = speechSynthesis.getVoices();
 
- if (selected) voice.voice = selected;
+  const selectedVoice = voices.find(v =>
+    /samantha|jenny|aria|zira/i.test(v.name) &&
+    v.lang.startsWith("en")
+  ) || voices.find(v =>
+    v.lang.startsWith("en")
+  );
 
- speechSynthesis.speak(voice);
+  if (selectedVoice) {
+    voice.voice = selectedVoice;
+  }
+
+  speechSynthesis.speak(voice);
 }
 
-function stopVoice() {
- speechSynthesis.cancel();
-}
+// ===================================
+// BACKGROUND PRINCESS MUSIC
+// Original synthesized melody
+// ===================================
 
-// ORIGINAL MAGICAL MUSIC
-let audioContext;
-let musicTimer;
+let audioContext = null;
+let musicTimer = null;
 let noteIndex = 0;
 
 const melody = [
- 523.25,659.25,783.99,1046.50,
- 880,783.99,659.25,587.33,
- 698.46,880,1046.50,783.99
+  523.25, 659.25, 783.99, 1046.50,
+  783.99, 659.25, 587.33, 698.46,
+  880.00, 783.99, 659.25, 523.25,
+  587.33, 698.46, 783.99, 659.25
 ];
 
 function playNote() {
- const now = audioContext.currentTime;
- const osc = audioContext.createOscillator();
- const gain = audioContext.createGain();
 
- osc.type = "sine";
- osc.frequency.value = melody[noteIndex % melody.length];
+  if (!audioContext) return;
 
- gain.gain.setValueAtTime(.0001,now);
- gain.gain.exponentialRampToValueAtTime(.05,now+.1);
- gain.gain.exponentialRampToValueAtTime(.0001,now+.8);
+  const now = audioContext.currentTime;
 
- osc.connect(gain);
- gain.connect(audioContext.destination);
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
 
- osc.start();
- osc.stop(now+.85);
+  oscillator.type = "sine";
+  oscillator.frequency.value =
+    melody[noteIndex % melody.length];
 
- noteIndex++;
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.035, now + 0.12);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.85);
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+
+  oscillator.start(now);
+  oscillator.stop(now + 0.9);
+
+  noteIndex++;
+}
+
+async function startMusic() {
+
+  if (musicTimer) return;
+
+  try {
+
+    if (!audioContext) {
+      audioContext = new (
+        window.AudioContext ||
+        window.webkitAudioContext
+      )();
+    }
+
+    await audioContext.resume();
+
+    playNote();
+
+    musicTimer = setInterval(playNote, 850);
+
+  } catch (error) {
+    console.log("Music could not start:", error);
+  }
 }
 
 async function toggleMusic() {
- const btn = document.getElementById("musicButton");
 
- if (musicTimer) {
-  clearInterval(musicTimer);
-  musicTimer = null;
-  await audioContext.suspend();
-  btn.innerText = "🎵 Play Magical Princess Music";
-  return;
- }
+  if (musicTimer) {
 
- if (!audioContext) {
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
- }
+    clearInterval(musicTimer);
+    musicTimer = null;
 
- await audioContext.resume();
+    if (audioContext) {
+      await audioContext.suspend();
+    }
 
- playNote();
- musicTimer = setInterval(playNote,850);
+  } else {
 
- btn.innerText = "⏸ Pause Magical Music";
+    await startMusic();
+
+  }
 }
 
-// COUNTDOWN
-function updateCountdown() {
- const target = new Date(
-  "2026-11-16T14:00:00+08:00"
- ).getTime();
+// Try autoplay when the page opens.
+// Browsers may require the visitor to interact first.
 
- const distance = target - Date.now();
+window.addEventListener("load", () => {
+  startMusic();
+});
 
- const values = distance <= 0 ? [0,0,0,0] : [
-  Math.floor(distance / 86400000),
-  Math.floor(distance % 86400000 / 3600000),
-  Math.floor(distance % 3600000 / 60000),
-  Math.floor(distance % 60000 / 1000)
- ];
+// Start music on the first visitor interaction if autoplay was blocked.
 
- ["days","hours","minutes","seconds"].forEach((id,i) => {
-  document.getElementById(id).innerText =
-   String(values[i]).padStart(2,"0");
- });
-}
+document.addEventListener("pointerdown", () => {
+  if (!musicTimer) startMusic();
+}, { once: true });
 
-updateCountdown();
-setInterval(updateCountdown,1000);
 
+// ===================================
 // RSVP
+// ===================================
+
 function rsvp() {
- const guest = prompt("May we know your name, dear guest?");
- if (!guest || !guest.trim()) return;
 
- const attending = confirm(
-  "Will you be joining Feona's birthday?"
- );
+  const guest = prompt(
+    "May we know your name, dear guest? 💗"
+  );
 
- const message =
-  "Hello! I'm " + guest + ". " +
-  (attending ? "I will attend" : "I cannot attend") +
-  " Feona Jae's 7th birthday on November 16, 2026 at 2 PM.";
+  if (!guest || !guest.trim()) return;
 
- window.open(
-  "https://wa.me/?text=" + encodeURIComponent(message),
-  "_blank"
- );
+  const attending = confirm(
+    "Will you be joining Feona's magical birthday celebration?"
+  );
+
+  const message =
+    "Hello! I'm " + guest.trim() + ". " +
+    (attending ? "I will attend" : "I cannot attend") +
+    " Feona Jae's 7th birthday on November 16, 2026 at 2 PM.";
+
+  window.open(
+    "https://wa.me/?text=" + encodeURIComponent(message),
+    "_blank"
+  );
 }
 
-// GOOGLE MAPS
+
+// ===================================
+// FIND THE ROYAL CASTLE
+// ===================================
+
 function openMap() {
- window.open(
-  "https://www.google.com/maps/search/?api=1&query=The+Courtyard+Resort+Morong+Rizal",
-  "_blank"
- );
+
+  window.open(
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent("The Courtyard Resort, Morong, Rizal"),
+    "_blank"
+  );
+
 }
 
 </script>
