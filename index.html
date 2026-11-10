@@ -198,17 +198,51 @@ body.invitation-open .invitation{animation:castleReveal 2.5s ease both}@keyframe
 <section class="countdown reveal"><h3>✨ Countdown to my Birthday! ✨</h3><div class="timer"><div class="time-box"><strong id="days">00</strong><span>Days</span></div><div class="time-box"><strong id="hours">00</strong><span>Hours</span></div><div class="time-box"><strong id="minutes">00</strong><span>Minutes</span></div><div class="time-box"><strong id="seconds">00</strong><span>Seconds</span></div></div></section><section class="special-day reveal"><div class="script">A Princess's Special Day</div><img src="feona-full.jpeg" alt="Feona's Full Princess Dress" onerror="this.onerror=null;this.src='feona-full.png';"><p>Can't wait to celebrate with you!</p></section><div class="footer">Thank you for being part of my magical day! 💕</div></main></div><script>
 function updateCountdown(){const target=new Date("2026-11-16T14:00:00+08:00").getTime();let d=Math.max(0,target-Date.now());const vals=[Math.floor(d/86400000),Math.floor(d%86400000/3600000),Math.floor(d%3600000/60000),Math.floor(d%60000/1000)];["days","hours","minutes","seconds"].forEach((id,i)=>document.getElementById(id).textContent=String(vals[i]).padStart(2,"0"))}updateCountdown();setInterval(updateCountdown,1000);
 let musicAudio=null;
-function startMusic(){
-  if(musicAudio&&!musicAudio.paused)return;
-  if(!musicAudio){
-    musicAudio=new Audio("./geoffharvey-a-thousand-dreams-528066.mp3");
-    musicAudio.preload="auto";
-    musicAudio.loop=true;
-    musicAudio.volume=0.05;
+let musicContext=null;
+let musicGain=null;
+const normalMusicGain=0.075;
+const voiceMusicGain=0.012;
+function prepareMusicAudio(){
+  if(musicAudio)return;
+  musicAudio=new Audio("./geoffharvey-a-thousand-dreams-528066.mp3");
+  musicAudio.preload="auto";
+  musicAudio.loop=true;
+  musicAudio.volume=1;
+  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+  if(AudioContextClass){
+    try{
+      musicContext=new AudioContextClass();
+      const musicSource=musicContext.createMediaElementSource(musicAudio);
+      musicGain=musicContext.createGain();
+      musicGain.gain.value=normalMusicGain;
+      musicSource.connect(musicGain);
+      musicGain.connect(musicContext.destination);
+    }catch(error){
+      console.warn("Web Audio volume control unavailable; using audio element volume.",error);
+      musicContext=null;
+      musicGain=null;
+      musicAudio.volume=0.025;
+    }
+  }else{
+    musicAudio.volume=0.025;
   }
+}
+function setMusicLevel(level){
+  if(musicGain&&musicContext){
+    musicGain.gain.setTargetAtTime(level,musicContext.currentTime,0.12);
+  }else if(musicAudio){
+    musicAudio.volume=level===voiceMusicGain?0.006:0.025;
+  }
+}
+function startMusic(){
+  prepareMusicAudio();
+  if(musicContext&&musicContext.state==="suspended"){
+    musicContext.resume().catch(error=>console.warn("Audio context resume was blocked:",error));
+  }
+  if(!musicAudio.paused)return;
   const playback=musicAudio.play();
   if(playback&&typeof playback.catch==="function"){
-    playback.catch(error=>console.warn("Background music playback was blocked:",error));
+    playback.catch(error=>console.warn("Background music autoplay was blocked; it will retry after the envelope is tapped:",error));
   }
 }
 function rsvp(){const name=prompt("May we know your name, dear guest? 💗");if(!name||!name.trim())return;const yes=confirm("Will you attend Feona Jae's 7th birthday?");const msg="Hello! I'm "+name.trim()+". "+(yes?"I will attend":"I cannot attend")+" Feona Jae's 7th Birthday on November 16, 2026 at 2 PM.";window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank")}
@@ -226,10 +260,15 @@ function playPrincessVoiceover(){
   princessAudio=new Audio("./princess-voice.mp3");
   princessAudio.preload="auto";
   princessAudio.volume=1;
-  princessAudio.addEventListener("ended",()=>{startMusic();},{once:true});
+  setMusicLevel(voiceMusicGain);
+  if(musicContext&&musicContext.state==="suspended"){
+    musicContext.resume().catch(error=>console.warn("Audio context resume was blocked:",error));
+  }
+  princessAudio.addEventListener("ended",()=>{setMusicLevel(normalMusicGain);startMusic();},{once:true});
   princessAudio.addEventListener("error",()=>{
     console.error("Unable to load princess-voice.mp3",princessAudio.error);
     princessVoiceStarted=false;
+    setMusicLevel(normalMusicGain);
     startMusic();
   },{once:true});
   const playback=princessAudio.play();
@@ -237,6 +276,7 @@ function playPrincessVoiceover(){
     playback.catch(error=>{
       console.error("Princess voice playback was blocked:",error);
       princessVoiceStarted=false;
+      setMusicLevel(normalMusicGain);
       startMusic();
     });
   }
@@ -251,6 +291,9 @@ function openRoyalInvitation(){
   playPrincessVoiceover();
   startMusic();
 }
+/* Try to start the background music as soon as the invitation link opens.
+   Browsers may block sound autoplay; startMusic() is retried on the envelope tap. */
+startMusic();
 if(openingScene){
   openingScene.addEventListener("click",openRoyalInvitation);
   openingScene.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openRoyalInvitation()}});
