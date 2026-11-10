@@ -200,8 +200,8 @@ function updateCountdown(){const target=new Date("2026-11-16T14:00:00+08:00").ge
 let musicAudio=null;
 let musicContext=null;
 let musicGain=null;
-const normalMusicGain=0.075;
-const voiceMusicGain=0.012;
+const normalMusicGain=0.14;
+const voiceMusicGain=0.018;
 function prepareMusicAudio(){
   if(musicAudio)return;
   musicAudio=new Audio("./geoffharvey-a-thousand-dreams-528066.mp3");
@@ -221,7 +221,7 @@ function prepareMusicAudio(){
       console.warn("Web Audio volume control unavailable; using audio element volume.",error);
       musicContext=null;
       musicGain=null;
-      musicAudio.volume=0.025;
+      musicAudio.volume=0.10;
     }
   }else{
     musicAudio.volume=0.025;
