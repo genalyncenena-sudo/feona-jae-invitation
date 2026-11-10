@@ -200,10 +200,9 @@ body.invitation-open .invitation{animation:castleReveal 2.5s ease both}@keyframe
 function updateCountdown(){const target=new Date("2026-11-16T14:00:00+08:00").getTime();let d=Math.max(0,target-Date.now());const vals=[Math.floor(d/86400000),Math.floor(d%86400000/3600000),Math.floor(d%3600000/60000),Math.floor(d%60000/1000)];["days","hours","minutes","seconds"].forEach((id,i)=>document.getElementById(id).textContent=String(vals[i]).padStart(2,"0"))}updateCountdown();setInterval(updateCountdown,1000);
 let ytPlayer=null,ytReady=false;
 function startMusic(){if(ytReady){ytPlayer.unMute();ytPlayer.setVolume(55);ytPlayer.playVideo()}}
-function onYouTubeIframeAPIReady(){ytPlayer=new YT.Player("youtubePlayer",{height:"200",width:"200",videoId:"ILRs2r6lcHY",playerVars:{autoplay:1,controls:0,disablekb:1,playsinline:1,loop:1,playlist:"ILRs2r6lcHY"},events:{onReady:function(e){ytReady=true;e.target.unMute();e.target.setVolume(55);e.target.playVideo()},onError:function(){console.warn("The selected YouTube music could not be played.")}}})}
+function onYouTubeIframeAPIReady(){ytPlayer=new YT.Player("youtubePlayer",{height:"200",width:"200",videoId:"ILRs2r6lcHY",playerVars:{autoplay:0,controls:0,disablekb:1,playsinline:1,loop:1,playlist:"ILRs2r6lcHY"},events:{onReady:function(e){ytReady=true;e.target.setVolume(55)},onError:function(){console.warn("The selected YouTube music could not be played.")}}})}
 const ytApi=document.createElement("script");ytApi.src="https://www.youtube.com/iframe_api";document.head.appendChild(ytApi);
-// If the browser blocks sound autoplay, start playback on the visitor's first tap or click anywhere.
-document.addEventListener("pointerdown",function enableMusic(){startMusic();},{once:true});
+// Background music starts after the princess narration so mobile browsers do not interrupt the voice-over.
 function rsvp(){const name=prompt("May we know your name, dear guest? 💗");if(!name||!name.trim())return;const yes=confirm("Will you attend Feona Jae's 7th birthday?");const msg="Hello! I'm "+name.trim()+". "+(yes?"I will attend":"I cannot attend")+" Feona Jae's 7th Birthday on November 16, 2026 at 2 PM.";window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank")}
 
 
@@ -215,20 +214,22 @@ let princessAudio=null;
 function playPrincessVoiceover(){
   if(princessVoiceStarted)return;
   princessVoiceStarted=true;
-  // Create and start the audio directly inside the envelope click action.
+  // Start the narration first; some mobile browsers interrupt one audio source with another.
   princessAudio=new Audio("./princess-voice.mp3");
   princessAudio.preload="auto";
   princessAudio.volume=1;
-  princessAudio.playsInline=true;
+  princessAudio.addEventListener("ended",()=>{startMusic();},{once:true});
   princessAudio.addEventListener("error",()=>{
     console.error("Unable to load princess-voice.mp3",princessAudio.error);
     princessVoiceStarted=false;
+    startMusic();
   },{once:true});
   const playback=princessAudio.play();
   if(playback&&typeof playback.catch==="function"){
     playback.catch(error=>{
       console.error("Princess voice playback was blocked:",error);
       princessVoiceStarted=false;
+      startMusic();
     });
   }
 }
@@ -239,7 +240,6 @@ function openRoyalInvitation(){
   document.body.classList.add("invitation-open");
   setTimeout(()=>openingScene.classList.add("dismiss"),3000);
   setTimeout(()=>{if(openingScene)openingScene.remove()},4300);
-  startMusic();
   playPrincessVoiceover();
 }
 if(openingScene){
