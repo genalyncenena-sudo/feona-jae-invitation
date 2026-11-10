@@ -209,46 +209,21 @@ function rsvp(){const name=prompt("May we know your name, dear guest? 💗");if(
 
 const openingScene=document.getElementById("openingScene");
 
-/* Princess-style English voiceover using the browser's built-in speech synthesis */
+/* Play the uploaded princess voice recording */
 let princessVoiceStarted=false;
-function choosePrincessVoice(){
-  if(!("speechSynthesis" in window))return null;
-  const voices=window.speechSynthesis.getVoices();
-  const english=voices.filter(v=>/^en(-|$)/i.test(v.lang));
-  const femaleHints=/female|samantha|victoria|karen|moira|tessa|ava|susan|zira|aria|jenny|serena|kate|emma/i;
-  return english.find(v=>femaleHints.test(v.name))||english.find(v=>/en-US/i.test(v.lang))||english[0]||null;
-}
+const princessAudio=new Audio("princess-voice.mp3");
+princessAudio.preload="auto";
+princessAudio.volume=1;
 function playPrincessVoiceover(){
-  if(princessVoiceStarted||!("speechSynthesis" in window))return;
+  if(princessVoiceStarted)return;
   princessVoiceStarted=true;
-  const lines=[
-    "Once upon a time, in a magical kingdom, a very special celebration was about to begin.",
-    "A little princess is turning seven!",
-    "You are cordially invited to celebrate Princess Feona Jae's seventh birthday.",
-    "Join us on November sixteenth, twenty twenty-six, at two o'clock in the afternoon.",
-    "For more details and important information about this magical celebration, simply click the Reminder button!",
-    "At the Courtyard Resort in Morong, Rizal.",
-    "We can't wait to see you there. Let the royal celebration begin!"
-  ];
-  const speakLine=(index)=>{
-    if(index>=lines.length)return;
-    const utterance=new SpeechSynthesisUtterance(lines[index]);
-    utterance.lang="en-US";
-    utterance.rate=0.88;
-    utterance.pitch=1.28;
-    utterance.volume=1;
-    const voice=choosePrincessVoice();
-    if(voice)utterance.voice=voice;
-    utterance.onend=()=>setTimeout(()=>speakLine(index+1),450);
-    utterance.onerror=()=>{ if(index+1<lines.length)setTimeout(()=>speakLine(index+1),250); };
-    window.speechSynthesis.speak(utterance);
-  };
-  // Allow the browser to populate its available voice list before choosing one.
-  if(window.speechSynthesis.getVoices().length){speakLine(0);}
-  else{
-    const onVoices=()=>{window.speechSynthesis.removeEventListener("voiceschanged",onVoices);speakLine(0);};
-    window.speechSynthesis.addEventListener("voiceschanged",onVoices);
-    setTimeout(()=>{if(!princessVoiceStarted)return; if(window.speechSynthesis.pending||window.speechSynthesis.speaking)return; speakLine(0);},700);
+  princessAudio.currentTime=0;
+  const playback=princessAudio.play();
+  if(playback&&typeof playback.catch==="function"){
+    playback.catch(error=>{
+      console.warn("The princess voice recording could not be played:",error);
+      princessVoiceStarted=false;
+    });
   }
 }
 
