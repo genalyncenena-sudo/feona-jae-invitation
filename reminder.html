@@ -92,12 +92,17 @@ h2 {
   margin-top: 25px;
   color: #a05ca5;
 }
+
+.music-control{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 20px;padding:11px 20px;border:2px solid white;border-radius:30px;background:linear-gradient(135deg,#e96abe,#9662d7);color:white;font:600 14px Poppins,sans-serif;box-shadow:0 5px 15px #9c55b744;cursor:pointer}
+.music-control:hover{transform:scale(1.04)}
 </style>
 </head>
 
 <body>
 
 <div class="card">
+
+  <button type="button" class="music-control" id="musicToggle" aria-label="Play background music">▶ Play Magical Music</button>
 
   <div class="crown">👑</div>
 
@@ -143,6 +148,43 @@ h2 {
   </p>
 
 </div>
+
+
+<script>
+(() => {
+  const music = new Audio("./geoffharvey-a-thousand-dreams-528066.mp3");
+  music.loop = true;
+  music.preload = "auto";
+  music.volume = 0.17;
+  const button = document.getElementById("musicToggle");
+
+  function updateButton(playing) {
+    button.textContent = playing ? "❚❚ Pause Magical Music" : "▶ Play Magical Music";
+    button.setAttribute("aria-label", playing ? "Pause background music" : "Play background music");
+  }
+
+  async function startMusic() {
+    try {
+      await music.play();
+      updateButton(true);
+    } catch (error) {
+      updateButton(false);
+    }
+  }
+
+  button.addEventListener("click", async () => {
+    if (music.paused) {
+      await startMusic();
+    } else {
+      music.pause();
+      updateButton(false);
+    }
+  });
+
+  // Try autoplay on page load; mobile browsers may require a tap first.
+  startMusic();
+})();
+</script>
 
 </body>
 </html>
