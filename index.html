@@ -160,6 +160,32 @@ body.invitation-open .invitation{animation:castleReveal 2.5s ease both}@keyframe
 @keyframes titleStar{0%,100%{opacity:.15;transform:scale(.45) rotate(0)}45%{opacity:1;transform:scale(1.35) rotate(80deg)}70%{opacity:.65;transform:scale(.85) rotate(150deg)}}
 @media(prefers-reduced-motion:reduce){.story-heading .tagline,.story-heading .tagline:before,.story-heading .tagline:after{animation:none}}
 
+
+/* Clear, readable title with separate orbiting sparkles */
+.story-heading{position:relative;overflow:visible}
+.story-heading .tagline{
+  color:#8b2caa!important;
+  -webkit-text-fill-color:#8b2caa!important;
+  background:none!important;
+  filter:none!important;
+  text-shadow:0 1px 0 #fff,0 2px 3px rgba(92,35,112,.22)!important;
+  animation:titleFloatSoft 4s ease-in-out infinite!important;
+  position:relative;z-index:2
+}
+.story-heading .tagline:before,.story-heading .tagline:after{content:none!important}
+.title-sparkle{
+  position:absolute;z-index:3;pointer-events:none;
+  color:#f2b928;font-family:Georgia,serif;line-height:1;
+  text-shadow:0 0 2px #fff,0 0 7px #fff2a8,0 0 13px #ee8bd4;
+  animation:orbitTwinkle 1.8s ease-in-out infinite;
+}
+@keyframes orbitTwinkle{
+  0%,100%{opacity:.25;transform:scale(.65) rotate(0deg)}
+  45%{opacity:1;transform:scale(1.25) rotate(75deg)}
+  70%{opacity:.8;transform:scale(.9) rotate(130deg)}
+}
+@media(prefers-reduced-motion:reduce){.title-sparkle{animation:none;opacity:.8}}
+
 </style></head><body><div class="opening-scene" id="openingScene" role="button" tabindex="0" aria-label="Open Feona Jae's royal invitation"><div class="opening-glow"></div><h2 class="opening-title">A Royal Invitation Awaits...</h2><div class="envelope-wrap" id="envelopeWrap"><div class="envelope-letter"><strong>For You, Dear Guest</strong><span>YOU ARE CORDIALLY INVITED</span></div><div class="envelope-pocket"></div><div class="envelope-flap"></div><div class="envelope-seal">👑</div></div><p class="envelope-hint">✨ TAP THE ENVELOPE TO OPEN ✨</p></div><div class="page">
 
 <main class="invitation"><span class="butterfly one" aria-hidden="true">🦋</span><span class="butterfly two" aria-hidden="true">🦋</span><span class="butterfly three" aria-hidden="true">🦋</span><span class="butterfly four" aria-hidden="true">🦋</span><span class="butterfly five" aria-hidden="true">🦋</span><span class="butterfly six" aria-hidden="true">🦋</span><span class="butterfly seven" aria-hidden="true">🦋</span><span class="butterfly eight" aria-hidden="true">🦋</span><span class="butterfly nine" aria-hidden="true">🦋</span><span class="butterfly ten" aria-hidden="true">🦋</span><span class="butterfly eleven" aria-hidden="true">🦋</span><span class="butterfly twelve" aria-hidden="true">🦋</span><div class="story-heading reveal"><p class="tagline">Once Upon a Birthday</p><p class="tagline-sub">A magical celebration awaits!</p></div><div class="content"><div class="portrait-wrap reveal"><img class="portrait" src="feona-portrait.jpeg" alt="Princess Feona Jae" onerror="this.onerror=null;this.src='feona-full.jpeg';"></div><section class="details">
@@ -194,6 +220,30 @@ if(openingScene){
   openingScene.addEventListener("click",openRoyalInvitation);
   openingScene.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openRoyalInvitation()}});
 }
+
+
+(function addTitleSparkles(){
+  const heading=document.querySelector(".story-heading");
+  if(!heading)return;
+  const stars=[
+    {x:5,y:24,s:19,d:0},{x:95,y:22,s:17,d:.35},
+    {x:9,y:78,s:14,d:.7},{x:91,y:80,s:20,d:1.05},
+    {x:24,y:8,s:13,d:.5},{x:76,y:8,s:15,d:1.25},
+    {x:2,y:52,s:12,d:.9},{x:98,y:48,s:13,d:.2},
+    {x:17,y:94,s:12,d:1.4},{x:83,y:94,s:14,d:.65}
+  ];
+  stars.forEach((p,i)=>{
+    const star=document.createElement("span");
+    star.className="title-sparkle";
+    star.textContent=i%3===0?"✧":"✦";
+    star.setAttribute("aria-hidden","true");
+    star.style.left=p.x+"%";
+    star.style.top=p.y+"%";
+    star.style.fontSize=p.s+"px";
+    star.style.animationDelay=(-p.d)+"s";
+    heading.appendChild(star);
+  });
+})();
 
 // Add soft magical sparkles and reveal sections as visitors scroll.
 (function(){
