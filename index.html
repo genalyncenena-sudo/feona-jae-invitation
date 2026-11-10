@@ -148,6 +148,18 @@ body.invitation-open .invitation{animation:castleReveal 2.5s ease both}@keyframe
 @media(max-width:640px){.opening-title{margin-bottom:18px}.envelope-wrap{height:clamp(210px,65vw,300px)}.envelope-hint{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.opening-scene,.opening-title,.envelope-wrap,.envelope-letter,.envelope-flap,.envelope-seal,.page,.invitation,.invitation *{animation:none!important;transition:none!important}.page{opacity:1}.opening-scene{display:none}}
 
+
+/* Animated sparkling fairytale title */
+.story-heading{overflow:visible}
+.story-heading .tagline{display:inline-block;position:relative;animation:titleShimmer 2.8s ease-in-out infinite,titleFloatSoft 4s ease-in-out infinite;background:linear-gradient(90deg,#8b2caa 0%,#d52b9b 22%,#fff0a8 38%,#b34ac6 52%,#f7a9d8 68%,#8b2caa 86%);background-size:220% auto;background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px #fff)}
+.story-heading .tagline:before,.story-heading .tagline:after{content:"✦";position:absolute;color:#fff4a8;-webkit-text-fill-color:#fff4a8;font:18px Georgia,serif;text-shadow:0 0 5px #fff,0 0 12px #f7a1e4,0 0 20px #d95acb;animation:titleStar 1.7s ease-in-out infinite}
+.story-heading .tagline:before{left:-22px;top:8%;animation-delay:-.6s}
+.story-heading .tagline:after{right:-22px;bottom:10%;font-size:14px;animation-delay:-1.2s}
+@keyframes titleShimmer{0%,100%{background-position:100% center}50%{background-position:0 center}}
+@keyframes titleFloatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes titleStar{0%,100%{opacity:.15;transform:scale(.45) rotate(0)}45%{opacity:1;transform:scale(1.35) rotate(80deg)}70%{opacity:.65;transform:scale(.85) rotate(150deg)}}
+@media(prefers-reduced-motion:reduce){.story-heading .tagline,.story-heading .tagline:before,.story-heading .tagline:after{animation:none}}
+
 </style></head><body><div class="opening-scene" id="openingScene" role="button" tabindex="0" aria-label="Open Feona Jae's royal invitation"><div class="opening-glow"></div><h2 class="opening-title">A Royal Invitation Awaits...</h2><div class="envelope-wrap" id="envelopeWrap"><div class="envelope-letter"><strong>For You, Dear Guest</strong><span>YOU ARE CORDIALLY INVITED</span></div><div class="envelope-pocket"></div><div class="envelope-flap"></div><div class="envelope-seal">👑</div></div><p class="envelope-hint">✨ TAP THE ENVELOPE TO OPEN ✨</p></div><div class="page">
 
 <main class="invitation"><span class="butterfly one" aria-hidden="true">🦋</span><span class="butterfly two" aria-hidden="true">🦋</span><span class="butterfly three" aria-hidden="true">🦋</span><span class="butterfly four" aria-hidden="true">🦋</span><span class="butterfly five" aria-hidden="true">🦋</span><span class="butterfly six" aria-hidden="true">🦋</span><span class="butterfly seven" aria-hidden="true">🦋</span><span class="butterfly eight" aria-hidden="true">🦋</span><span class="butterfly nine" aria-hidden="true">🦋</span><span class="butterfly ten" aria-hidden="true">🦋</span><span class="butterfly eleven" aria-hidden="true">🦋</span><span class="butterfly twelve" aria-hidden="true">🦋</span><div class="story-heading reveal"><p class="tagline">Once Upon a Birthday</p><p class="tagline-sub">A magical celebration awaits!</p></div><div class="content"><div class="portrait-wrap reveal"><img class="portrait" src="feona-portrait.jpeg" alt="Princess Feona Jae" onerror="this.onerror=null;this.src='feona-full.jpeg';"></div><section class="details">
