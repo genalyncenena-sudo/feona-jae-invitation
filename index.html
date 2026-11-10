@@ -100,16 +100,38 @@ img{max-width:100%}
   html{scroll-behavior:auto}
   .butterfly{animation:none}
 }
+
+/* Magical motion enhancements */
+.invitation{isolation:isolate}
+.content,.countdown,.special-day,.footer{position:relative;z-index:2}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.is-visible{opacity:1;transform:translateY(0)}
+.sparkle{position:absolute;z-index:1;pointer-events:none;color:#fff8b8;text-shadow:0 0 7px #fff,0 0 15px #f7a9ed;font-size:clamp(12px,1.7vw,21px);animation:twinkle 3.8s ease-in-out infinite;opacity:0}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.45) rotate(0deg)}45%{opacity:.95;transform:scale(1.2) rotate(35deg)}65%{opacity:.45;transform:scale(.8) rotate(65deg)}}
+.butterfly{will-change:transform;transform-origin:center;filter:drop-shadow(0 3px 6px #a735c766)}
+.intro-panel{transition:box-shadow .5s ease,transform .5s ease}
+.intro-panel:hover{box-shadow:0 10px 28px rgba(100,38,126,.2),inset 0 0 0 1px rgba(255,255,255,.8);transform:translateY(-2px)}
+.action{transition:transform .25s ease,box-shadow .25s ease}
+.action:hover{transform:translateY(-3px) scale(1.025);box-shadow:0 8px 22px #692d8b66,inset 0 1px 5px #fff8}
+.time-box{transition:transform .35s ease,box-shadow .35s ease}
+.time-box:hover{transform:translateY(-5px);box-shadow:0 8px 18px #743b8735}
+@media(prefers-reduced-motion:reduce){
+ .reveal{opacity:1;transform:none;transition:none}
+ .sparkle{display:none}
+ .intro-panel,.action,.time-box{transition:none}
+ .intro-panel:hover,.action:hover,.time-box:hover{transform:none}
+}
+
 </style></head><body><div class="page">
 
-<main class="invitation"><span class="butterfly one" aria-hidden="true">🦋</span><span class="butterfly two" aria-hidden="true">🦋</span><span class="butterfly three" aria-hidden="true">🦋</span><span class="butterfly four" aria-hidden="true">🦋</span><span class="butterfly five" aria-hidden="true">🦋</span><span class="butterfly six" aria-hidden="true">🦋</span><span class="butterfly seven" aria-hidden="true">🦋</span><span class="butterfly eight" aria-hidden="true">🦋</span><span class="butterfly nine" aria-hidden="true">🦋</span><span class="butterfly ten" aria-hidden="true">🦋</span><span class="butterfly eleven" aria-hidden="true">🦋</span><span class="butterfly twelve" aria-hidden="true">🦋</span><div class="story-heading"><p class="tagline">Once Upon a Birthday</p><p class="tagline-sub">A magical celebration awaits!</p></div><div class="content"><div class="portrait-wrap"><img class="portrait" src="feona-portrait.jpeg" alt="Princess Feona Jae" onerror="this.onerror=null;this.src='feona-full.jpeg';"></div><section class="details">
-<div class="intro-panel"><p class="invited">You're Invited! ♡</p><p class="join">Join us as we celebrate</p><h1 class="name">Feona Jae</h1>
+<main class="invitation"><span class="butterfly one" aria-hidden="true">🦋</span><span class="butterfly two" aria-hidden="true">🦋</span><span class="butterfly three" aria-hidden="true">🦋</span><span class="butterfly four" aria-hidden="true">🦋</span><span class="butterfly five" aria-hidden="true">🦋</span><span class="butterfly six" aria-hidden="true">🦋</span><span class="butterfly seven" aria-hidden="true">🦋</span><span class="butterfly eight" aria-hidden="true">🦋</span><span class="butterfly nine" aria-hidden="true">🦋</span><span class="butterfly ten" aria-hidden="true">🦋</span><span class="butterfly eleven" aria-hidden="true">🦋</span><span class="butterfly twelve" aria-hidden="true">🦋</span><div class="story-heading reveal"><p class="tagline">Once Upon a Birthday</p><p class="tagline-sub">A magical celebration awaits!</p></div><div class="content"><div class="portrait-wrap reveal"><img class="portrait" src="feona-portrait.jpeg" alt="Princess Feona Jae" onerror="this.onerror=null;this.src='feona-full.jpeg';"></div><section class="details">
+<div class="intro-panel reveal"><p class="invited">You're Invited! ♡</p><p class="join">Join us as we celebrate</p><h1 class="name">Feona Jae</h1>
 <div class="ribbon">7th Birthday</div>
 <div class="event"><div><span class="emoji">🗓️</span><strong>November 16, 2026</strong></div><div><span class="emoji">🕑</span><strong>2:00 PM</strong></div><div><span class="emoji">📍</span><strong>The Courtyard Resort,<br>Morong, Rizal</strong></div></div>
 <p class="story">Once upon a time... a little princess is turning 7!<br>And she would love for you to be part of her magical day! ♡</p></div>
 </section></div>
-<div class="buttons"><button class="action" onclick="rsvp()">💌 RSVP ♥</button><a class="action location" href="https://www.google.com/maps/search/?api=1&query=The+Courtyard+Resort+Morong+Rizal" target="_blank" rel="noopener">📍 Find the Royal Castle</a><a class="action" href="reminder.html">👑 A Magical Reminder!</a></div>
-<section class="countdown"><h3>✨ Countdown to my Birthday! ✨</h3><div class="timer"><div class="time-box"><strong id="days">00</strong><span>Days</span></div><div class="time-box"><strong id="hours">00</strong><span>Hours</span></div><div class="time-box"><strong id="minutes">00</strong><span>Minutes</span></div><div class="time-box"><strong id="seconds">00</strong><span>Seconds</span></div></div></section><section class="special-day"><div class="script">A Princess's Special Day</div><img src="feona-full.jpeg" alt="Feona's Full Princess Dress" onerror="this.onerror=null;this.src='feona-full.png';"><p>Can't wait to celebrate with you!</p></section><div class="footer">Thank you for being part of my magical day! 💕</div></main></div><div id="youtubePlayer" aria-hidden="true" style="position:fixed;left:-220px;top:0;width:200px;height:200px;opacity:0;pointer-events:none;overflow:hidden"></div>
+<div class="buttons reveal"><button class="action" onclick="rsvp()">💌 RSVP ♥</button><a class="action location" href="https://www.google.com/maps/search/?api=1&query=The+Courtyard+Resort+Morong+Rizal" target="_blank" rel="noopener">📍 Find the Royal Castle</a><a class="action" href="reminder.html">👑 A Magical Reminder!</a></div>
+<section class="countdown reveal"><h3>✨ Countdown to my Birthday! ✨</h3><div class="timer"><div class="time-box"><strong id="days">00</strong><span>Days</span></div><div class="time-box"><strong id="hours">00</strong><span>Hours</span></div><div class="time-box"><strong id="minutes">00</strong><span>Minutes</span></div><div class="time-box"><strong id="seconds">00</strong><span>Seconds</span></div></div></section><section class="special-day reveal"><div class="script">A Princess's Special Day</div><img src="feona-full.jpeg" alt="Feona's Full Princess Dress" onerror="this.onerror=null;this.src='feona-full.png';"><p>Can't wait to celebrate with you!</p></section><div class="footer">Thank you for being part of my magical day! 💕</div></main></div><div id="youtubePlayer" aria-hidden="true" style="position:fixed;left:-220px;top:0;width:200px;height:200px;opacity:0;pointer-events:none;overflow:hidden"></div>
 <script>
 function updateCountdown(){const target=new Date("2026-11-16T14:00:00+08:00").getTime();let d=Math.max(0,target-Date.now());const vals=[Math.floor(d/86400000),Math.floor(d%86400000/3600000),Math.floor(d%3600000/60000),Math.floor(d%60000/1000)];["days","hours","minutes","seconds"].forEach((id,i)=>document.getElementById(id).textContent=String(vals[i]).padStart(2,"0"))}updateCountdown();setInterval(updateCountdown,1000);
 let ytPlayer=null,ytReady=false;
@@ -119,4 +141,37 @@ const ytApi=document.createElement("script");ytApi.src="https://www.youtube.com/
 // If the browser blocks sound autoplay, start playback on the visitor's first tap or click anywhere.
 document.addEventListener("pointerdown",function enableMusic(){startMusic();},{once:true});
 function rsvp(){const name=prompt("May we know your name, dear guest? 💗");if(!name||!name.trim())return;const yes=confirm("Will you attend Feona Jae's 7th birthday?");const msg="Hello! I'm "+name.trim()+". "+(yes?"I will attend":"I cannot attend")+" Feona Jae's 7th Birthday on November 16, 2026 at 2 PM.";window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank")}
+
+// Add soft magical sparkles and reveal sections as visitors scroll.
+(function(){
+  const invitation=document.querySelector(".invitation");
+  if(invitation){
+    const positions=[[8,18],[19,34],[31,13],[43,27],[57,11],[70,31],[88,17],[94,53],[78,72],[61,88],[39,78],[21,63],[6,86],[51,48],[84,42],[28,91],[72,8],[13,48]];
+    positions.forEach((p,i)=>{
+      const star=document.createElement("span");
+      star.className="sparkle";
+      star.textContent=i%3===0?"✧":"✦";
+      star.setAttribute("aria-hidden","true");
+      star.style.left=p[0]+"%";
+      star.style.top=p[1]+"%";
+      star.style.animationDelay=(i*.23)+"s";
+      invitation.appendChild(star);
+    });
+  }
+  const reveals=document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window){
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:.12});
+    reveals.forEach(el=>observer.observe(el));
+  }else{
+    reveals.forEach(el=>el.classList.add("is-visible"));
+  }
+})();
+
 </script></body></html>
