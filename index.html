@@ -23,6 +23,83 @@
 .buttons{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:14px;margin:18px auto 24px;width:calc(100% - 32px);max-width:1000px;position:relative;z-index:6}.action{display:inline-block;text-decoration:none;padding:13px 22px;font-size:clamp(15px,1.5vw,20px);background:linear-gradient(120deg,#ed48a4,#9c4bd3)}.location{background:linear-gradient(120deg,#a34acb,#7136b1)}
 .countdown{margin:0 auto 15px;text-align:center}.countdown h3{display:block;background:transparent;color:#922da9;padding:4px 12px;margin:0 0 12px;border:0;border-radius:0;font:clamp(38px,5vw,58px) 'Great Vibes',cursive;text-shadow:1px 2px #fff}.timer{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}.time-box{min-width:84px;padding:10px 14px;background:rgba(255,255,255,.88);border:2px solid #efc5e2;border-radius:20px;box-shadow:0 4px 10px #743b8725}.time-box strong{display:block;color:#a33cb5;font:700 36px 'Playfair Display',serif}.time-box span{font:600 12px 'Poppins',sans-serif;letter-spacing:.12em;color:#754879}.special-day{max-width:550px;margin:24px auto 22px;padding:24px 20px;background:rgba(255,255,255,.82);border:2px solid #e7c6e9;border-radius:28px;box-shadow:0 8px 24px #8f6a9b25;text-align:center}.special-day .script{font:clamp(38px,5vw,54px) 'Great Vibes',cursive;color:#b36baa;margin:0 0 8px}.special-day img{display:block;width:min(90%,390px);height:auto;max-height:520px;object-fit:contain;margin:10px auto 12px;border:6px solid white;border-radius:22px;box-shadow:0 8px 22px #70408030}.special-day p{font:clamp(17px,2vw,21px) 'Playfair Display',serif;color:#754879;margin:8px 0 0}.footer{text-align:center;padding:4px 5px 12px;color:#873e9c;font:30px 'Great Vibes',cursive}
 @media(max-width:800px){.page{padding:8px;background-attachment:scroll}.content{grid-template-columns:1fr;padding:12px;gap:0}.portrait-wrap{min-height:0;max-height:430px}.portrait{width:min(78%,360px);height:420px}.details{padding:10px 4px}.voice{margin-left:0}.music-bar{justify-content:center}.event{max-width:440px}.countdown h3{font-size:16px}.footer{font-size:26px}}@media(max-width:420px){.control{font-size:14px;padding:9px 13px}.music-actions button:not(.control){width:40px;height:40px}.portrait{height:340px}.action{padding:11px 14px}.event{padding:10px 14px}}
+
+/* Responsive layout refinements for tablets and phones */
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+img{max-width:100%}
+@media (max-width:900px){
+  .page{padding:10px;background-attachment:scroll;background-position:center top;background-size:cover}
+  .invitation{border-width:3px;border-radius:24px}
+  .content{grid-template-columns:minmax(0, .85fr) minmax(0, 1.15fr);min-height:0;padding:16px;gap:14px}
+  .portrait-wrap{min-height:0;align-self:center}
+  .portrait{height:auto;max-height:560px;aspect-ratio:3/4;object-fit:cover}
+  .details{padding:8px}
+  .intro-panel{padding:clamp(14px,2.5vw,22px);border-radius:24px}
+  .intro-panel .name{font-size:clamp(58px,8vw,100px)}
+  .ribbon{font-size:clamp(30px,4.5vw,46px);margin-top:16px}
+  .event{font-size:clamp(14px,1.8vw,18px);padding:12px 15px}
+  .event .emoji{font-size:22px;min-width:25px}
+  .story{font-size:clamp(14px,1.7vw,18px)}
+  .countdown h3{font-size:clamp(32px,5vw,48px)}
+}
+@media (max-width:640px){
+  .page{padding:7px;background-image:linear-gradient(180deg,rgba(247,222,255,.28),rgba(255,231,247,.38)),url('princess-background.png');background-position:center top;background-size:cover;background-attachment:scroll}
+  .music-bar{justify-content:center;gap:9px;padding:4px 2px}
+  .music-actions{justify-content:center;gap:7px;width:100%}
+  .control{font-size:clamp(12px,3.4vw,15px);padding:9px 13px;border-width:2px}
+  .music-actions button:not(.control){width:39px;height:39px;font-size:17px}
+  .volume{width:70px}
+  .voice{margin:0 auto;padding:9px 14px}
+  .invitation{border-radius:20px}
+  .story-heading{width:calc(100% - 18px);margin:12px auto 8px;padding:11px 12px;border-radius:20px;border-width:2px}
+  .tagline{font-size:clamp(32px,9vw,48px);line-height:1.1}
+  .tagline-sub{font-size:clamp(12px,3.5vw,16px)}
+  .content{display:flex;flex-direction:column;min-height:0;padding:8px 10px;gap:8px}
+  .portrait-wrap{width:100%;max-height:none;min-height:0;align-items:center}
+  .portrait{display:block;width:min(72vw,290px);height:auto;aspect-ratio:3/4;max-height:380px;object-fit:cover;border-width:4px;border-radius:150px 150px 22px 22px}
+  .details{width:100%;padding:4px 0}
+  .intro-panel{width:100%;margin:4px auto 8px;padding:14px 12px 16px;border-radius:21px}
+  .intro-panel .invited{font-size:clamp(38px,10vw,54px)}
+  .intro-panel .join{font-size:clamp(14px,3.8vw,18px)}
+  .intro-panel .name{font-size:clamp(58px,15vw,82px);line-height:1.05;overflow-wrap:anywhere}
+  .ribbon{font-size:clamp(27px,7.5vw,39px);margin-top:12px}
+  .event{width:100%;margin:13px auto 9px;padding:10px 12px;border-width:2px;border-radius:19px;font-size:clamp(13px,3.7vw,16px);line-height:1.4}
+  .event div{gap:9px;align-items:flex-start;margin:6px 0}
+  .event .emoji{font-size:20px;min-width:23px}
+  .story{font-size:clamp(13px,3.7vw,16px);line-height:1.5;margin:9px auto 0}
+  .buttons{width:calc(100% - 22px);margin:12px auto 18px;gap:9px;flex-direction:column}
+  .buttons .action{width:100%;min-width:0;max-width:360px;justify-content:center;padding:12px 14px;font-size:clamp(14px,3.8vw,17px);border-width:2px}
+  .countdown{padding:0 8px;margin-bottom:14px}
+  .countdown h3{font-size:clamp(29px,8vw,42px);line-height:1.12;padding:4px 2px;margin-bottom:9px}
+  .timer{gap:7px}
+  .time-box{flex:1 1 20%;min-width:0;max-width:92px;padding:8px 5px;border-radius:15px}
+  .time-box strong{font-size:clamp(23px,7vw,31px)}
+  .time-box span{font-size:clamp(9px,2.5vw,11px);letter-spacing:.07em}
+  .special-day{width:calc(100% - 22px);margin:17px auto;padding:17px 12px;border-radius:21px}
+  .special-day .script{font-size:clamp(34px,9vw,46px);line-height:1.1}
+  .special-day img{width:min(88%,320px);max-height:440px;border-width:4px;border-radius:17px}
+  .special-day p{font-size:clamp(14px,3.8vw,17px)}
+  .footer{font-size:clamp(23px,6vw,28px);line-height:1.2;padding:5px 8px 13px}
+  .butterfly{font-size:23px;opacity:.8}
+  .butterfly.two{font-size:25px}.butterfly.three{font-size:26px}.butterfly.four{font-size:21px}
+}
+@media (max-width:380px){
+  .page{padding:5px}
+  .music-actions{gap:5px}
+  .control{padding:8px 10px}
+  .music-actions button:not(.control){width:35px;height:35px}
+  .volume{width:58px}
+  .portrait{width:min(68vw,245px)}
+  .intro-panel{padding:12px 9px}
+  .event{font-size:12px;padding:9px 10px}
+  .time-box{padding:7px 3px}
+  .time-box span{letter-spacing:.03em}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .butterfly{animation:none}
+}
 </style></head><body><div class="page">
 <div class="music-bar"><div class="music-actions"><button class="control" onclick="toggleMusic()" id="musicLabel">🎵 Background Music</button><button aria-label="Play music" onclick="startMusic()">▶</button><button aria-label="Pause music" onclick="pauseMusic()">Ⅱ</button><button aria-label="Stop music" onclick="stopMusic()">■</button><span>🔊</span><input class="volume" id="volume" type="range" min="0" max="1" step=".05" value=".55"></div><button class="control voice" onclick="playVoice()">🔊 Play Invitation Voice</button></div>
 <main class="invitation"><span class="butterfly one" aria-hidden="true">🦋</span><span class="butterfly two" aria-hidden="true">🦋</span><span class="butterfly three" aria-hidden="true">🦋</span><span class="butterfly four" aria-hidden="true">🦋</span><div class="story-heading"><p class="tagline">Once Upon a Birthday</p><p class="tagline-sub">A magical celebration awaits!</p></div><div class="content"><div class="portrait-wrap"><img class="portrait" src="feona-portrait.jpeg" alt="Princess Feona Jae" onerror="this.onerror=null;this.src='feona-full.jpeg';"></div><section class="details">
