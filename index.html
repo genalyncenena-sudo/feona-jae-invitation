@@ -209,19 +209,25 @@ function rsvp(){const name=prompt("May we know your name, dear guest? 💗");if(
 
 const openingScene=document.getElementById("openingScene");
 
-/* Play the uploaded princess voice recording */
+/* Play the uploaded princess voice recording after the guest taps the envelope */
 let princessVoiceStarted=false;
-const princessAudio=new Audio("princess-voice.mp3");
-princessAudio.preload="auto";
-princessAudio.volume=1;
+let princessAudio=null;
 function playPrincessVoiceover(){
   if(princessVoiceStarted)return;
   princessVoiceStarted=true;
-  princessAudio.currentTime=0;
+  // Create and start the audio directly inside the envelope click action.
+  princessAudio=new Audio("./princess-voice.mp3");
+  princessAudio.preload="auto";
+  princessAudio.volume=1;
+  princessAudio.playsInline=true;
+  princessAudio.addEventListener("error",()=>{
+    console.error("Unable to load princess-voice.mp3",princessAudio.error);
+    princessVoiceStarted=false;
+  },{once:true});
   const playback=princessAudio.play();
   if(playback&&typeof playback.catch==="function"){
     playback.catch(error=>{
-      console.warn("The princess voice recording could not be played:",error);
+      console.error("Princess voice playback was blocked:",error);
       princessVoiceStarted=false;
     });
   }
