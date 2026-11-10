@@ -149,26 +149,73 @@ h2 {
   const music = new Audio("./geoffharvey-a-thousand-dreams-528066.mp3");
   music.loop = true;
   music.preload = "auto";
-  music.volume = 0.17;
+  const normalMusicVolume = 0.17;
+  const voiceMusicVolume = 0.05;
+  music.volume = normalMusicVolume;
 
-  async function startMusic() {
-    try {
-      await music.play();
-    } catch (error) {
-      // Browsers may block audible autoplay until the visitor interacts.
-      const resumeOnFirstInteraction = () => {
-        music.play().catch(() => {});
-        document.removeEventListener("pointerdown", resumeOnFirstInteraction);
-        document.removeEventListener("touchstart", resumeOnFirstInteraction);
-        document.removeEventListener("keydown", resumeOnFirstInteraction);
-      };
-      document.addEventListener("pointerdown", resumeOnFirstInteraction, { once: true });
-      document.addEventListener("touchstart", resumeOnFirstInteraction, { once: true });
-      document.addEventListener("keydown", resumeOnFirstInteraction, { once: true });
+  const reminderText = "A Magical Reminder! Dear Royal Guests, As we prepare for a magical day filled with happiness, laughter, and wonderful memories, we have one little reminder for you! Please don't forget to bring your swimming attire! You are welcome to enjoy swimming after the birthday program! We can't wait to see you! With love, Princess Feona Jae.";
+  let narrationStarted = false;
+
+  function startMusic() {
+    music.play().catch(() => {});
+  }
+
+  function speakReminder() {
+    if (narrationStarted || !("speechSynthesis" in window)) return;
+    narrationStarted = true;
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(reminderText);
+    utterance.lang = "en-US";
+    utterance.rate = 0.88;
+    utterance.pitch = 1.12;
+    utterance.volume = 1;
+
+    const chooseVoice = () => {
+      const voices = window.speechSynthesis.getVoices();
+      const englishVoices = voices.filter(voice => /^en(-|_)/i.test(voice.lang));
+      const preferredVoice = englishVoices.find(voice =>
+        /female|samantha|ava|karen| victoria|zira|aria|jenny|sara|susan/i.test(voice.name)
+      ) || englishVoices.find(voice => /en-US/i.test(voice.lang)) || englishVoices[0];
+      if (preferredVoice) utterance.voice = preferredVoice;
+    };
+
+    chooseVoice();
+    utterance.onstart = () => {
+      music.volume = voiceMusicVolume;
+      startMusic();
+    };
+    utterance.onend = () => {
+      music.volume = normalMusicVolume;
+      narrationStarted = true;
+    };
+    utterance.onerror = () => {
+      music.volume = normalMusicVolume;
+      narrationStarted = false;
+    };
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function beginExperience() {
+    startMusic();
+    if (!narrationStarted) speakReminder();
+  }
+
+  // Try automatically. If the browser blocks sound or speech, retry on the
+  // visitor's first interaction (required by some mobile browsers).
+  startMusic();
+  if ("speechSynthesis" in window) {
+    if (document.readyState === "complete") {
+      speakReminder();
+    } else {
+      window.addEventListener("load", speakReminder, { once: true });
     }
   }
 
-  startMusic();
+  ["pointerdown", "touchstart", "keydown"].forEach(eventName => {
+    document.addEventListener(eventName, beginExperience, { once: true, passive: true });
+  });
 })();
 </script>
 
