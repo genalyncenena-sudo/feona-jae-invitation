@@ -200,7 +200,7 @@ function updateCountdown(){const target=new Date("2026-11-16T14:00:00+08:00").ge
 let musicAudio=null;
 let musicContext=null;
 let musicGain=null;
-const normalMusicGain=0.14;
+const normalMusicGain=0.17;
 const voiceMusicGain=0.018;
 function prepareMusicAudio(){
   if(musicAudio)return;
@@ -221,17 +221,17 @@ function prepareMusicAudio(){
       console.warn("Web Audio volume control unavailable; using audio element volume.",error);
       musicContext=null;
       musicGain=null;
-      musicAudio.volume=0.10;
+      musicAudio.volume=0.13;
     }
   }else{
-    musicAudio.volume=0.025;
+    musicAudio.volume=0.035;
   }
 }
 function setMusicLevel(level){
   if(musicGain&&musicContext){
     musicGain.gain.setTargetAtTime(level,musicContext.currentTime,0.12);
   }else if(musicAudio){
-    musicAudio.volume=level===voiceMusicGain?0.006:0.025;
+    musicAudio.volume=level===voiceMusicGain?0.006:0.035;
   }
 }
 function startMusic(){
